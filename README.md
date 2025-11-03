@@ -22,7 +22,6 @@ Hackman/
 ├── train_agent.py               # Q-learning or DQN RL agent training
 ├── play_agent.py                # Evaluation script (2000 games, scoring)
 ├── q_table.pkl                  # Saved RL model (Q-table)
-│
 ```
 
 ---
