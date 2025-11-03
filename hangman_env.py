@@ -28,14 +28,14 @@ class HangmanEnv:
 
         if letter in self.word:
             self._reveal(letter)
-            reward = 2
+            reward = 3
         else:
             self.lives -= 1
             reward = -1
 
         if "_" not in self.masked:
             self.done = True
-            reward += 10
+            reward += 20
         elif self.lives <= 0:
             self.done = True
             reward -= 5

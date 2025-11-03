@@ -6,7 +6,7 @@ from hangman_env import HangmanEnv
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
 class QLearningAgent:
-    def __init__(self, oracle, alpha=0.1, gamma=0.9, epsilon=1.0, eps_decay=0.995, eps_min=0.05):
+    def __init__(self, oracle, alpha=0.1, gamma=0.9, epsilon=1.0, eps_decay=0.999, eps_min=0.05):
         self.oracle = oracle
         self.alpha = alpha
         self.gamma = gamma
