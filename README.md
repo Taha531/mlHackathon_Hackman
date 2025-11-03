@@ -23,8 +23,6 @@ Hackman/
 ├── play_agent.py                # Evaluation script (2000 games, scoring)
 ├── q_table.pkl                  # Saved RL model (Q-table)
 │
-├── Analysis_Report.pdf          # Final analysis and insights (to be generated)
-├── README.md                    # This file
 ```
 
 ---
