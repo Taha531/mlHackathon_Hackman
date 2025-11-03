@@ -1,12 +1,6 @@
-'''
- Simple HMM-like Oracle for Hangman
- Uses your cleaned and length-wise dissected corpus
- to estimate letter probabilities for each hidden word.
-'''
-
 import os
 import collections
-import matplotlib.pyplot as plt   # <--- new import for plotting
+import matplotlib.pyplot as plt
 
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
@@ -88,7 +82,6 @@ class HMMOracle:
             for i in blanks:
                 letter_counts[w[i]] += 1
 
-        # smoothing and fallback
         for ch in ALPHABET:
             letter_counts[ch] += 1
         for g in guessed_set:
@@ -109,25 +102,20 @@ class HMMOracle:
         for ch in probs:
             probs[ch] /= s
         return probs
-    
 
-oracle = HMMOracle()
-masked = '__pp_e'
-guessed = {'p', 'e'}
 
-probs = oracle.get_probs(masked, guessed)
-top = sorted(probs.items(), key=lambda x: -x[1])[:8]
-print("\nTop letter predictions for", masked, ":", top)
+if __name__ == "__main__":
+    oracle = HMMOracle()
+    masked = "__pp_e"
+    guessed = {'p', 'e'}
+    probs = oracle.get_probs(masked, guessed)
 
-# Plot the full probability distribution
-letters = list(probs.keys())
-values = [probs[ch] for ch in letters]
+    letters = list(probs.keys())
+    values = [probs[ch] for ch in letters]
 
-plt.figure(figsize=(12, 5))
-plt.bar(letters, values, color='skyblue')
-plt.title(f"Letter Probability Distribution for '{masked}' (guessed: {', '.join(guessed)})")
-plt.xlabel("Letters")
-plt.ylabel("Probability")
-plt.grid(axis='y', linestyle='--', alpha=0.6)
-plt.tight_layout()
-plt.show()
+    plt.figure(figsize=(12, 5))
+    plt.bar(letters, values, color='skyblue')
+    plt.title(f"Letter Probability Distribution for '{masked}'")
+    plt.xlabel("Letters")
+    plt.ylabel("Probability")
+    plt.show()
