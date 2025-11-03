@@ -99,7 +99,7 @@ torch (optional if using GPU/DQN)
 
 Install:
 ```bash
-pip install numpy pandas matplotlib torch
+pip install numpy pandas matplotlib
 ```
 
 ---
