@@ -88,15 +88,6 @@ python play_agent.py
 
 ---
 
-## 📊 Outputs Collected for Report
-You will later provide:
-- **Training logs** (`reward per episode`, `ε decay`)
-- **Evaluation summary** (wins, score)
-- **Plots** of learning curve and performance  
-These will go into `Analysis_Report.pdf`.
-
----
-
 ## 🧪 Requirements
 ```
 Python ≥ 3.10
@@ -126,11 +117,4 @@ pip install numpy pandas matplotlib torch
 ```
 Final Score = (SuccessRate * 2000) - (WrongGuesses * 5) - (RepeatedGuesses * 2)
 ```
-
 ---
-
-## 🧩 Future Work
-- Move from Q-table → Deep Q-Network (DQN)
-- Use multi-length adaptive HMMs
-- Integrate GPU-accelerated neural training
-- Add reward shaping for partial progress
