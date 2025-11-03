@@ -1,8 +1,14 @@
-# In this code we are Cleaning the Data.
-# 1) Lowercasing all words.
-# 2) Removing Duplicates.
-# 3) Grouping all the words according to their length.
-# We will first be reading the file, process the data, and then save it to a new file. 
+'''
+
+In this code we are Cleaning the Data.
+
+ 1) Lowercasing all words.
+ 2) Removing Duplicates.
+ 3) Grouping all the words according to their length.
+ 
+ We will first be reading the file, process the data, and then save it to a new file. 
+
+'''
 
 # This function takes the file paths of input and output file.
 def clean_corpus(input_file, output_file): 
