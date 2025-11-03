@@ -22,9 +22,6 @@ Hackman/
 ├── train_agent.py               # Q-learning or DQN RL agent training
 ├── play_agent.py                # Evaluation script (2000 games, scoring)
 ├── q_table.pkl                  # Saved RL model (Q-table)
-│
-├── Analysis_Report.pdf          # Final analysis and insights (to be generated)
-├── README.md                    # This file
 ```
 
 ---
@@ -91,27 +88,17 @@ python play_agent.py
 
 ---
 
-## 📊 Outputs Collected for Report
-You will later provide:
-- **Training logs** (`reward per episode`, `ε decay`)
-- **Evaluation summary** (wins, score)
-- **Plots** of learning curve and performance  
-These will go into `Analysis_Report.pdf`.
-
----
-
 ## 🧪 Requirements
 ```
 Python ≥ 3.10
 numpy
 pandas
 matplotlib
-torch (optional if using GPU/DQN)
 ```
 
 Install:
 ```bash
-pip install numpy pandas matplotlib torch
+pip install numpy pandas matplotlib
 ```
 
 ---
@@ -129,11 +116,4 @@ pip install numpy pandas matplotlib torch
 ```
 Final Score = (SuccessRate * 2000) - (WrongGuesses * 5) - (RepeatedGuesses * 2)
 ```
-
 ---
-
-## 🧩 Future Work
-- Move from Q-table → Deep Q-Network (DQN)
-- Use multi-length adaptive HMMs
-- Integrate GPU-accelerated neural training
-- Add reward shaping for partial progress
