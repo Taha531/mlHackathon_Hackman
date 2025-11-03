@@ -1,55 +1,51 @@
-import time
-import os
 from hmm_oracle import HMMOracle
 from hangman_env import HangmanEnv
-from train_agent import RLAgent
+from train_agent import QLearningAgent
 
 if __name__ == "__main__":
-    print("🤖 Testing trained RL Agent...")
+    print("🤖 Evaluating Q-Learning Agent...")
 
-    test_file = "C:/Users/taham/Documents/College/ML_Hackathon/Hackman/Data/test.txt"
-    qtable_path = "C:/Users/taham/Documents/College/ML_Hackathon/Hackman/q_table.pkl"
-
-    if not os.path.exists(test_file):
-        print(f"[!] Test file not found at: {test_file}")
-        exit()
-    if not os.path.exists(qtable_path):
-        print(f"[!] Q-table not found: {qtable_path}")
-        exit()
-
+    test_file = "Data/test.txt"  
     oracle = HMMOracle()
     env = HangmanEnv(test_file)
-    agent = RLAgent(oracle)
-    agent.load(qtable_path)
+    agent = QLearningAgent(oracle)
+    agent.load("q_table.pkl")
 
-    print("[+] Q-table loaded successfully.")
-    total_games = 2000
+    total_games = 2000  
     wins = 0
+    total_wrong = 0
+    total_repeated = 0
+    total_score = 0
 
-    for game in range(1, total_games + 1):
+    for _ in range(total_games):
         masked = env.reset()
         guessed = set()
-        print(f"\n🎮 Game {game} — Word length: {len(env.word)}")
-        env.display()
+        wrong_guesses = 0
+        repeated_guesses = 0
+        game_score = 0
 
         while not env.done:
-            time.sleep(0.2)
-            prev_state = masked
             action = agent.choose_action(masked, guessed)
+            if action in guessed:
+                repeated_guesses += 1
             masked, reward, done = env.step(action)
             guessed.add(action)
-            env.display()
+            if reward == -1:
+                wrong_guesses += 1
+            game_score += reward
 
-            # Optional online learning (comment out if not needed)
-            agent.update_q(prev_state, action, reward, masked)
-
-        if '_' not in masked:
-            print(f"✅ Agent won! Word: {env.word.upper()}")
+        total_score += game_score
+        total_wrong += wrong_guesses
+        total_repeated += repeated_guesses
+        if "_" not in masked:
             wins += 1
-        else:
-            print(f"❌ Agent lost! Word: {env.word.upper()}")
 
-        # Save after each game (optional)
-        agent.save(qtable_path)
+    success_rate = wins / total_games
+    final_score = (success_rate * 2000) - (total_wrong * 5) - (total_repeated * 2)
 
-    print(f"\n🏁 Final Score: {wins}/{total_games} wins.")
+    print("\n🏁 EVALUATION SUMMARY")
+    print(f"✅ Wins: {wins}/{total_games} ({success_rate * 100:.2f}%)")
+    print(f"❌ Wrong Guesses: {total_wrong}")
+    print(f"🔁 Repeated Guesses: {total_repeated}")
+    print(f"💰 Average Reward per Game: {total_score / total_games:.2f}")
+    print(f"🏆 Final Score: {final_score:.2f}")
