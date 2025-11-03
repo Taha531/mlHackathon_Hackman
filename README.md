@@ -94,7 +94,6 @@ Python ≥ 3.10
 numpy
 pandas
 matplotlib
-torch (optional if using GPU/DQN)
 ```
 
 Install:
